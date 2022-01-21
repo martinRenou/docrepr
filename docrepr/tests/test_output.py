@@ -166,7 +166,10 @@ TEST_CASES = {
 # ---- Helper functions
 
 def _test_cases_to_params(test_cases):
-    return [tuple(test_case.values()) for test_case in test_cases.values()]
+    return [
+        (test_id, *test_case.values())
+        for test_id, test_case in test_cases.items()
+    ]
 
 
 # ---- Fixtures
@@ -199,14 +202,15 @@ def fixture_set_docrepr_options():
 
 # ---- Tests
 
+@pytest.mark.asyncio
 @pytest.mark.parametrize(
-    ('obj', 'oinfo_data', 'docrepr_options'),
+    ('test_id', 'obj', 'oinfo_data', 'docrepr_options'),
     _test_cases_to_params(TEST_CASES),
     ids=list(TEST_CASES.keys()),
     )
-def test_sphinxify(
-        build_oinfo, set_docrepr_options, open_browser,
-        obj, oinfo_data, docrepr_options,
+async def test_sphinxify(
+        build_oinfo, set_docrepr_options, open_browser, compare_screenshots,
+        test_id, obj, oinfo_data, docrepr_options,
         ):
     if (oinfo_data.get("docstring", None) == PLOT_DOCSTRING
             and sys.version_info.major == 3
@@ -227,4 +231,5 @@ def test_sphinxify(
     file_text = output_file.read_text(encoding='utf-8', errors='strict')
     assert len(file_text) > 512
 
+    await compare_screenshots(test_id, url)
     open_browser(url)
