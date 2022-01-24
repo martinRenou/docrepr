@@ -67,7 +67,7 @@ def compare_screenshots(request):
 
             # Take a screenshot of the generated HTML
             with sync_playwright() as p:
-                browser = p.chromium.launch()
+                browser = p.firefox.launch()
                 page = browser.new_page()
                 page.goto(f'file://{url}')
 
