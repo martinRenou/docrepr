@@ -49,7 +49,7 @@ jobs:
       run: python -m playwright install chromium
     - name: Run tests
       shell: bash
-      run: python -I -bb -X dev -W error -m pytest
+      run: python -I -bb -X dev -W error -m pytest --compare-screenshots
     - name: Upload UI Test artifacts
       if: failure()
       uses: actions/upload-artifact@v2
