@@ -54,7 +54,7 @@ jobs:
       if: failure()
       uses: actions/upload-artifact@v2
       with:
-        name: visual-regression-test-output-${{ matrix.os }}
+        name: visual-regression-test-output-${{ matrix.python-version }}
         path: |
           docrepr/tests/references/**
           docrepr/tests/screenshots/**
