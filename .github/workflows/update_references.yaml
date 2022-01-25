@@ -46,6 +46,8 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
+          git pull
+
           git add docrepr/tests/references
 
           git commit -m "Update references"
