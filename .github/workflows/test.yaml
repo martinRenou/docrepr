@@ -73,7 +73,7 @@ jobs:
         import sys
         print(sys.executable, sys.version, sep='\n')
     - name: Install docrepr
-      run: python -m pip install --upgrade .[visual_tests]
+      run: python -m pip install --upgrade .[test,visual_tests]
     - name: List packages in environment
       run: pip list
     - name: Install Firefox
