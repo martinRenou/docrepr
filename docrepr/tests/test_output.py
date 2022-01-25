@@ -208,7 +208,7 @@ def fixture_set_docrepr_options():
     _test_cases_to_params(TEST_CASES),
     ids=list(TEST_CASES.keys()),
     )
-def test_sphinxify(
+async def test_sphinxify(
         build_oinfo, set_docrepr_options, open_browser, compare_screenshots,
         test_id, obj, oinfo_data, docrepr_options,
         ):
@@ -231,5 +231,5 @@ def test_sphinxify(
     file_text = output_file.read_text(encoding='utf-8', errors='strict')
     assert len(file_text) > 512
 
-    compare_screenshots(test_id, url)
+    await compare_screenshots(test_id, url)
     open_browser(url)
